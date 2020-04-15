@@ -58,14 +58,14 @@ PaperDB.create({ directory: 'test_db' }).then(async (paperdb) => {
   const c = await paperdb.collection.create<typeof Type1>({
     doctype: 'type1',
     accessControllers: [ACConstDocType, ACConstUser],
-    metainfo: { id0: 'test' },
+    metainfo: { id0: 'test', unique: +new Date() },
     preloadDoc: new Type1(10086),
   })
 
   console.log(c.id)
 
   const { preloadDocRef, metainfo } = await c.instantLoad()
-  console.log(metainfo) // { id0: 'test' }
+  console.log(metainfo) // { id0: 'test', unique: number }
   console.log(await preloadDocRef?.data()) // new Type1(10086)
 
   // add a document into the collection
