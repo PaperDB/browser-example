@@ -1,0 +1,34 @@
+{
+  "name": "@paperdb/example",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaperDB/example.git"
+  },
+  "keywords": [
+    "PaperDB"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/PaperDB/example/issues"
+  },
+  "homepage": "https://github.com/PaperDB/example#readme",
+  "dependencies": {
+    "@paper-db/paper-db": "^0.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "parcel": "^1.12.4",
+    "typescript": "^3.8.3"
+  },
+  "browserslist": [
+    "> 5%"
+  ],
+  "scripts": {
+    "build": "parcel build index.ts --public-url ./",
+    "watch": "parcel watch index.ts --public-url ./"
+  }
+}
