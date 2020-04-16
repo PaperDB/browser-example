@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/PaperDB/example#readme",
   "dependencies": {
-    "@paper-db/paper-db": "^0.2.1"
+    "@paper-db/paper-db": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
