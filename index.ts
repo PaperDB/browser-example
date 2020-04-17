@@ -1,5 +1,6 @@
 
 import PaperDB from '@paper-db/paper-db'
+import { PaperDBDate } from '@paper-db/paper-db/dist/types/date'
 import { TypedObj } from '@paper-db/paper-db/dist/types/converter'
 import { ACConstUser, ACConstDocType } from '@paper-db/paper-db/dist/access-controller'
 
@@ -47,6 +48,8 @@ declare module '@paper-db/paper-db' {
 
 PaperDB.create({ directory: 'test_db' }).then(async (paperdb) => {
   console.log(paperdb)
+  // eslint-disable-next-line no-undef
+  self['paperdb'] = paperdb
 
   // add the converter into the TYPE_REGISTRY
   paperdb.TYPE_REGISTRY.add(Type1)
@@ -75,4 +78,17 @@ PaperDB.create({ directory: 'test_db' }).then(async (paperdb) => {
   console.log(await (await c.doc(doc1.id)).data()) // new Type1(123)
 
   console.log((await c.getAll()).length) // 2, including the preload document
+
+  // replication
+  const c0 = await paperdb.collection.create({
+    metainfo: { id0: 'paperdb-example' },
+  })
+  console.log(c0.id)
+  await c0.ready() // optional, as any async method on collection calls .ready
+
+  await c0.onSnapshot(() => {
+    c0.getAll().then(console.log)
+  })
+
+  await c0.add(new PaperDBDate())
 })
